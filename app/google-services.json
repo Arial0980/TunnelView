@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "918878621562",
+    "firebase_url": "https://esp-connection-to-altera-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "esp-connection-to-altera",
+    "storage_bucket": "esp-connection-to-altera.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:918878621562:android:21b917074c307d314a90c3",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "918878621562-od81bmu7ebha9agdpg3i9jutolpdn7vd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC412y1J4LQAuIH2elMJofrCM9NipqU6Dc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "918878621562-od81bmu7ebha9agdpg3i9jutolpdn7vd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
