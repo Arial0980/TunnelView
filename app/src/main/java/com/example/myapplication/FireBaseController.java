@@ -44,27 +44,5 @@ public class FireBaseController {
         }
     }
 
-    public Long getStraightCoordinate() {
-        long straightCoordinate ;
-        DatabaseReference myRef = database.getReference("dis1");
-        Task<DataSnapshot> task = myRef.get();
-        straightCoordinate=task.getResult().getValue(Long.class);
-        return straightCoordinate;
-    }
-
-    public Long getLeftCoordinate() {
-        long leftCoordinate;
-        DatabaseReference myRef = database.getReference("dis2");
-        Task<DataSnapshot> task = myRef.get();
-        leftCoordinate=task.getResult().getValue(Long.class);
-        return leftCoordinate;
-    }
-    public Long getRightCoordinate() {
-        long rightCoordinate;
-        DatabaseReference myRef = database.getReference("dis3");
-        Task<DataSnapshot> task = myRef.get();
-        rightCoordinate=task.getResult().getValue(Long.class);
-        return rightCoordinate;
-    }
 
 }

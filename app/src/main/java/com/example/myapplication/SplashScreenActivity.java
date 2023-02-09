@@ -1,5 +1,4 @@
 package com.example.myapplication;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -8,15 +7,14 @@ import android.os.Handler;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
-
 public class SplashScreenActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_splash_screen);
         ImageView splashImage = findViewById(R.id.imageView);
-
         ScaleAnimation scaleAnimation = new ScaleAnimation(
                 1.0f, 0.5f,
                 1.0f, 0.5f,

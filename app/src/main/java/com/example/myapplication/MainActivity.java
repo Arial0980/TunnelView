@@ -1,31 +1,37 @@
 package com.example.myapplication;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.VideoView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
-    private FireBaseController fireBaseController;
+    private boolean alreadyAutoControlled=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        fireBaseController=FireBaseController.getInstance();
-        VideoView videoView = findViewById(R.id.videoView);
-        Uri uri = Uri.parse("");
-        videoView.setVideoURI(uri);
-        videoView.start();
-
     }
     public void AutomaticMapping(View view){
-        fireBaseController.sendAutoControl();
+        FirebaseDatabase database=FirebaseDatabase.getInstance();
+        DatabaseReference myRef=database.getReference("to_altera");
+        if (alreadyAutoControlled) {
+            myRef.setValue(0);
+            alreadyAutoControlled=false;
+        }
+        else {
+            myRef.setValue(32);
+            alreadyAutoControlled=true;
+        }
     }
     public void DataPage(View view){
         Intent intent = new Intent(MainActivity.this, DataActivity.class);
+        startActivity(intent);
+
+    }
+    public void ControlPage(View view){
+        Intent intent = new Intent(MainActivity.this, ControlActivity.class);
         startActivity(intent);
 
     }

@@ -9,8 +9,8 @@
 
     <TextView
         android:id="@+id/Left_textView"
-        android:layout_width="100dp"
-        android:layout_height="30dp"
+        android:layout_width="120dp"
+        android:layout_height="32dp"
         android:layout_marginStart="80dp"
         android:text="Left:"
         android:textColor="#F4F4F4"
@@ -22,8 +22,8 @@
 
     <TextView
         android:id="@+id/Straight_textView"
-        android:layout_width="100dp"
-        android:layout_height="30dp"
+        android:layout_width="121dp"
+        android:layout_height="29dp"
         android:text="Straight: "
         android:textColor="#F4F4F4"
         android:textSize="20sp"
@@ -46,4 +46,77 @@
         app:layout_constraintBottom_toBottomOf="@+id/Straight_textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/Straight_textView" />
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/materialToolbar2"
+        android:layout_width="1000dp"
+        android:layout_height="30dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toTopOf="@+id/Straight_textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.947" />
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/materialToolbar4"
+        android:layout_width="1000dp"
+        android:layout_height="30dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.562"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Straight_textView"
+        app:layout_constraintVertical_bias="0.164" />
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/materialToolbar5"
+        android:layout_width="37dp"
+        android:layout_height="74dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toBottomOf="@+id/Straight_textView"
+        app:layout_constraintEnd_toStartOf="@+id/Straight_textView"
+        app:layout_constraintStart_toEndOf="@+id/Left_textView"
+        app:layout_constraintTop_toBottomOf="@+id/materialToolbar2" />
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/materialToolbar6"
+        android:layout_width="37dp"
+        android:layout_height="74dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toBottomOf="@+id/Straight_textView"
+        app:layout_constraintEnd_toStartOf="@+id/Right_textView"
+        app:layout_constraintStart_toEndOf="@+id/Straight_textView"
+        app:layout_constraintTop_toTopOf="@+id/Straight_textView" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="216dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="58dp"
+        android:layout_height="60dp"
+        android:backgroundTint="@color/blue_100"
+        android:onClick="exit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.994"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.011"
+        app:srcCompat="@drawable/exit_icon1" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
