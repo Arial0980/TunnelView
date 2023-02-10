@@ -1,10 +1,13 @@
 package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 
@@ -17,6 +20,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ImageView coinImage = findViewById(R.id.coin_image);
+
+        ObjectAnimator animator = ObjectAnimator.ofFloat(coinImage, "scaleX", 1f, -1f);
+        animator.setDuration(1500);
+        animator.setInterpolator(new LinearInterpolator());
+        animator.setRepeatCount(1000000);
+        animator.start();
 
     }
     public void AutomaticMapping(View view){

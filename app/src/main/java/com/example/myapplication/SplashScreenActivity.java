@@ -19,9 +19,9 @@ public class SplashScreenActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_splash_screen);
         ImageView splashImage = findViewById(R.id.imageView);
-        createDelay(5,splashImage);
+        createDelay(3050,splashImage);
 
-        animation2(splashImage);
+        pullingToSide(splashImage);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -32,21 +32,21 @@ public class SplashScreenActivity extends AppCompatActivity {
                 startActivity(intent, options.toBundle());
                 finish();
             }
-        }, 8000);
+        }, 6050);
     }
-    public void animation1( ImageView splashImage)
+    public void spin( ImageView splashImage)
     {
         ScaleAnimation scaleAnimation = new ScaleAnimation(
                 1.0f, 0.5f,
                 1.0f, 0.5f,
-                Animation.RELATIVE_TO_SELF, -0.35f,
-                Animation.RELATIVE_TO_SELF, 0.3f
+                Animation.RELATIVE_TO_SELF, -0.37f,
+                Animation.RELATIVE_TO_SELF, 0.25f
         );
-        scaleAnimation.setDuration(3000);
+        scaleAnimation.setDuration(3050);
         scaleAnimation.setFillAfter(true);
         splashImage.startAnimation(scaleAnimation);
     }
-    public void animation2( ImageView splashImage)
+    public void pullingToSide( ImageView splashImage)
     {
         RotateAnimation rotate = new RotateAnimation(
                 0, 360,
@@ -55,17 +55,17 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         rotate.setRepeatCount(Animation.INFINITE);
         rotate.setInterpolator(new LinearInterpolator());
-        rotate.setDuration(2500);
+        rotate.setDuration(3000);
         splashImage.startAnimation(rotate);
     }
-    private void createDelay(int seconds,ImageView splashImage) {
+    private void createDelay(int milliseconds,ImageView splashImage) {
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                animation1(splashImage);
+                spin(splashImage);
             }
-        }, seconds * 1000);
+        }, milliseconds);
     }
 
 }
