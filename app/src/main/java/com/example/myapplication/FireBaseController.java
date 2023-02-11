@@ -39,8 +39,7 @@ public class FireBaseController {
             alreadyAutoControlled=false;
         }
         else {
-            database.getReference("to_altera").setValue(32);
-            alreadyAutoControlled=true;
+
         }
     }
 
