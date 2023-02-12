@@ -19,7 +19,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_splash_screen);
         ImageView splashImage = findViewById(R.id.imageView);
-        createDelay(3050,splashImage);
+        createDelay(1620,splashImage);
 
         pullingToSide(splashImage);
         new Handler().postDelayed(new Runnable() {
@@ -32,7 +32,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                 startActivity(intent, options.toBundle());
                 finish();
             }
-        }, 6050);
+        }, 4650);
     }
     public void spin( ImageView splashImage)
     {
@@ -55,7 +55,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         rotate.setRepeatCount(Animation.INFINITE);
         rotate.setInterpolator(new LinearInterpolator());
-        rotate.setDuration(3000);
+        rotate.setDuration(1620);
         splashImage.startAnimation(rotate);
     }
     private void createDelay(int milliseconds,ImageView splashImage) {

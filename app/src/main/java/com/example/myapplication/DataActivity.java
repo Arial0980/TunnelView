@@ -18,29 +18,29 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+
 public class DataActivity extends AppCompatActivity {
     private DatabaseReference myRefDis1,myRefDis2,myRefDis3,myRefMapping,myRefWhat_To_Do;
     private int dis1,dis2,dis3,i_Current=0,x=5,y=11,i_FB,what_To_Do;
-    private String[][] matrix = new String[11][11];
+    private int[][] matrix = new int[11][11];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data);
         getSupportActionBar().hide();
-
         for (int i=0;i<11;i++)
         {
             for (int j=0;j<11;j++)
             {
-                matrix[i][j]="   ";
+                matrix[i][j]=0;
             }
         }
+
         TextView right=findViewById(R.id.Right_textView);
         TextView left=findViewById(R.id.Left_textView);
         TextView straight=findViewById(R.id.Straight_textView);
         // Read from the database
         FirebaseDatabase database= FirebaseDatabase.getInstance();
-
 
         myRefMapping = database.getReference("i_FB");
         myRefMapping.addValueEventListener(new ValueEventListener() {
@@ -122,8 +122,6 @@ public class DataActivity extends AppCompatActivity {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
-
-
     }
     public void mapping(int i_FB,int what_TO_Do)
     {
@@ -142,9 +140,9 @@ public class DataActivity extends AppCompatActivity {
             {
                y--;
             }
-            matrix[y][x+2]=" . ";
-            matrix[y][x-2]=" . ";
-            matrix[y][x]=" * ";
+            matrix[y][x+2]=1;
+            matrix[y][x-2]=1;
+            matrix[y][x]=1;
             y++;
         }
     }

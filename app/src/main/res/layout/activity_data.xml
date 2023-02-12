@@ -7,18 +7,33 @@
     android:background="#ED1E527C"
     tools:context=".DataActivity">
 
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/materialToolbar2"
+        android:layout_width="1000dp"
+        android:layout_height="30dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toTopOf="@+id/Straight_textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.959" />
+
     <TextView
         android:id="@+id/Left_textView"
         android:layout_width="120dp"
         android:layout_height="32dp"
-        android:layout_marginStart="80dp"
+        android:layout_marginStart="76dp"
         android:text="Left:"
         android:textColor="#F4F4F4"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/Straight_textView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/Straight_textView" />
+        app:layout_constraintTop_toTopOf="@+id/Straight_textView"
+        app:layout_constraintVertical_bias="0.666" />
 
     <TextView
         android:id="@+id/Straight_textView"
@@ -30,49 +45,24 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/Right_textView"
+        app:layout_constraintHorizontal_bias="0.541"
         app:layout_constraintStart_toEndOf="@+id/Left_textView"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.663" />
+        app:layout_constraintVertical_bias="0.85" />
 
     <TextView
         android:id="@+id/Right_textView"
         android:layout_width="100dp"
         android:layout_height="30dp"
-        android:layout_marginEnd="80dp"
+        android:layout_marginEnd="96dp"
         android:text="Right: "
         android:textColor="#F4F4F4"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/Straight_textView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/Straight_textView" />
-
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/materialToolbar2"
-        android:layout_width="1000dp"
-        android:layout_height="30dp"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toTopOf="@+id/Straight_textView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.947" />
-
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/materialToolbar4"
-        android:layout_width="1000dp"
-        android:layout_height="30dp"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.562"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Straight_textView"
-        app:layout_constraintVertical_bias="0.164" />
+        app:layout_constraintTop_toTopOf="@+id/Straight_textView"
+        app:layout_constraintVertical_bias="1.0" />
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/materialToolbar5"
@@ -83,8 +73,10 @@
         android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toBottomOf="@+id/Straight_textView"
         app:layout_constraintEnd_toStartOf="@+id/Straight_textView"
+        app:layout_constraintHorizontal_bias="0.518"
         app:layout_constraintStart_toEndOf="@+id/Left_textView"
-        app:layout_constraintTop_toBottomOf="@+id/materialToolbar2" />
+        app:layout_constraintTop_toBottomOf="@+id/materialToolbar2"
+        app:layout_constraintVertical_bias="0.484" />
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/materialToolbar6"
@@ -95,15 +87,31 @@
         android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toBottomOf="@+id/Straight_textView"
         app:layout_constraintEnd_toStartOf="@+id/Right_textView"
+        app:layout_constraintHorizontal_bias="0.619"
         app:layout_constraintStart_toEndOf="@+id/Straight_textView"
-        app:layout_constraintTop_toTopOf="@+id/Straight_textView" />
+        app:layout_constraintTop_toTopOf="@+id/Straight_textView"
+        app:layout_constraintVertical_bias="0.511" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="216dp" />
+        app:layout_constraintGuide_begin="287dp" />
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/materialToolbar4"
+        android:layout_width="1000dp"
+        android:layout_height="30dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.561"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Straight_textView"
+        app:layout_constraintVertical_bias="0.592" />
 
     <ImageButton
         android:id="@+id/imageButton3"
