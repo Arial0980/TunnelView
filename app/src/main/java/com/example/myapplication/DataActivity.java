@@ -20,21 +20,15 @@ import com.google.firebase.database.ValueEventListener;
 
 
 public class DataActivity extends AppCompatActivity {
-    private DatabaseReference myRefDis1,myRefDis2,myRefDis3,myRefMapping,myRefWhat_To_Do;
-    private int dis1,dis2,dis3,i_Current=0,x=5,y=11,i_FB,what_To_Do;
-    private int[][] matrix = new int[11][11];
+    private DatabaseReference myRefDis1,myRefDis2,myRefDis3,myRefMapping,myRefDidWhat;
+    private int dis1,dis2,dis3,i_Current=0,x,y,i_FB,didWhat;
+    private boolean b=true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data);
         getSupportActionBar().hide();
-        for (int i=0;i<11;i++)
-        {
-            for (int j=0;j<11;j++)
-            {
-                matrix[i][j]=0;
-            }
-        }
 
         TextView right=findViewById(R.id.Right_textView);
         TextView left=findViewById(R.id.Left_textView);
@@ -42,13 +36,17 @@ public class DataActivity extends AppCompatActivity {
         // Read from the database
         FirebaseDatabase database= FirebaseDatabase.getInstance();
 
-        myRefMapping = database.getReference("i_FB");
+        myRefMapping = database.getReference("i");
         myRefMapping.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                i_FB = dataSnapshot.getValue(Integer.class);
-                //i_view.setText("Straight:"+Integer.toString(i_FB));
-                Log.d(TAG, "Value is: " + i_FB);
+                i_Current = dataSnapshot.getValue(Integer.class);
+                Log.d(TAG, "Value is: " + i_Current);
+
+
+
+
+
             }
             @Override
             public void onCancelled(DatabaseError error) {
@@ -56,13 +54,13 @@ public class DataActivity extends AppCompatActivity {
             }
         });
 
-        myRefWhat_To_Do = database.getReference("What_To_Do");
-        myRefWhat_To_Do.addValueEventListener(new ValueEventListener() {
+        myRefDidWhat = database.getReference("didWhat");
+        myRefDidWhat.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                what_To_Do = dataSnapshot.getValue(Integer.class);
+                didWhat = dataSnapshot.getValue(Integer.class);
                 //i_view.setText("Straight:"+Integer.toString(i_FB));
-                Log.d(TAG, "Value is: " + what_To_Do);
+                Log.d(TAG, "Value is: " + didWhat);
             }
             @Override
             public void onCancelled(DatabaseError error) {
@@ -70,7 +68,7 @@ public class DataActivity extends AppCompatActivity {
             }
         });
 
-        myRefDis1 = database.getReference("dis1");
+        myRefDis1 = database.getReference("test/dis1");
         myRefDis1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -87,7 +85,7 @@ public class DataActivity extends AppCompatActivity {
             }
         });
 
-        myRefDis2 = database.getReference("dis2");
+        myRefDis2 = database.getReference("test/dis2");
         myRefDis2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -105,7 +103,7 @@ public class DataActivity extends AppCompatActivity {
             }
         });
 
-        myRefDis3 = database.getReference("dis3");
+        myRefDis3 = database.getReference("test/dis3");
         myRefDis3.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -122,29 +120,10 @@ public class DataActivity extends AppCompatActivity {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
-    }
-    public void mapping(int i_FB,int what_TO_Do)
-    {
 
-        while (i_FB>i_Current)
-        {
-            if(what_TO_Do==2)
-            {
-                x++;
-            }
-            else if(what_TO_Do==3)
-            {
-                x--;
-            }
-            else if(what_TO_Do==4)
-            {
-               y--;
-            }
-            matrix[y][x+2]=1;
-            matrix[y][x-2]=1;
-            matrix[y][x]=1;
-            y++;
-        }
+
+
+
     }
 
     public void exit(View view) {
