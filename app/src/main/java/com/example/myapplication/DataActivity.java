@@ -20,9 +20,8 @@ import com.google.firebase.database.ValueEventListener;
 
 
 public class DataActivity extends AppCompatActivity {
-    private DatabaseReference myRefDis1,myRefDis2,myRefDis3,myRefMapping,myRefDidWhat;
-    private int dis1,dis2,dis3,i_Current=0,x,y,i_FB,didWhat;
-    private boolean b=true;
+    private DatabaseReference myRefDis1,myRefDis2,myRefDis3;
+    private int dis1,dis2,dis3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,37 +35,7 @@ public class DataActivity extends AppCompatActivity {
         // Read from the database
         FirebaseDatabase database= FirebaseDatabase.getInstance();
 
-        myRefMapping = database.getReference("i");
-        myRefMapping.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                i_Current = dataSnapshot.getValue(Integer.class);
-                Log.d(TAG, "Value is: " + i_Current);
 
-
-
-
-
-            }
-            @Override
-            public void onCancelled(DatabaseError error) {
-                Log.w(TAG, "Failed to read value.", error.toException());
-            }
-        });
-
-        myRefDidWhat = database.getReference("didWhat");
-        myRefDidWhat.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                didWhat = dataSnapshot.getValue(Integer.class);
-                //i_view.setText("Straight:"+Integer.toString(i_FB));
-                Log.d(TAG, "Value is: " + didWhat);
-            }
-            @Override
-            public void onCancelled(DatabaseError error) {
-                Log.w(TAG, "Failed to read value.", error.toException());
-            }
-        });
 
         myRefDis1 = database.getReference("test/dis1");
         myRefDis1.addValueEventListener(new ValueEventListener() {
@@ -120,10 +89,6 @@ public class DataActivity extends AppCompatActivity {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
-
-
-
-
     }
 
     public void exit(View view) {

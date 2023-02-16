@@ -25,7 +25,8 @@ public class MyData {
     public int getDidWhat(){return this.dis1;}
     public void setDidWhat(int didWhat){this.didWhat=didWhat;}
 
-    public MyData setNext(){
-        return next;
-    }
+    public MyData getNext(){return this.next;}
+    //public MyData setNext(MyData next,int dis1,int dis2,int dis3,int didWhat){
+      //  return this.next=next;
+   // }
 }
