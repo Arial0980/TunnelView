@@ -19,9 +19,9 @@ public class SplashScreenActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_splash_screen);
         ImageView splashImage = findViewById(R.id.imageView);
-        createDelay(1620,splashImage);
-
-        pullingToSide(splashImage);
+        createDelay1(1300,splashImage);
+        createDelay2(2500,splashImage);
+        bigger(splashImage);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -32,9 +32,9 @@ public class SplashScreenActivity extends AppCompatActivity {
                 startActivity(intent, options.toBundle());
                 finish();
             }
-        }, 4650);
+        }, 4900);
     }
-    public void spin( ImageView splashImage)
+    public void pullingToSide( ImageView splashImage)
     {
         ScaleAnimation scaleAnimation = new ScaleAnimation(
                 1.0f, 0.5f,
@@ -46,7 +46,31 @@ public class SplashScreenActivity extends AppCompatActivity {
         scaleAnimation.setFillAfter(true);
         splashImage.startAnimation(scaleAnimation);
     }
-    public void pullingToSide( ImageView splashImage)
+    public void bigger( ImageView splashImage)
+    {
+        ScaleAnimation scaleAnimation = new ScaleAnimation(
+                1.0f, 1.5f,
+                1.0f, 1.5f,
+                Animation.RELATIVE_TO_SELF, 0.5f,
+                Animation.RELATIVE_TO_SELF, 0.5f
+        );
+        scaleAnimation.setDuration(1300);
+        scaleAnimation.setFillAfter(true);
+        splashImage.startAnimation(scaleAnimation);
+    }
+    public void smaller( ImageView splashImage)
+    {
+        ScaleAnimation scaleAnimation = new ScaleAnimation(
+                1.5f, 1.0f,
+                1.5f, 1.0f,
+                Animation.RELATIVE_TO_SELF, 0.5f,
+                Animation.RELATIVE_TO_SELF, 0.5f
+        );
+        scaleAnimation.setDuration(1300);
+        scaleAnimation.setFillAfter(true);
+        splashImage.startAnimation(scaleAnimation);
+    }
+    public void spin( ImageView splashImage)
     {
         RotateAnimation rotate = new RotateAnimation(
                 0, 360,
@@ -58,14 +82,23 @@ public class SplashScreenActivity extends AppCompatActivity {
         rotate.setDuration(1620);
         splashImage.startAnimation(rotate);
     }
-    private void createDelay(int milliseconds,ImageView splashImage) {
+    private void createDelay2(int milliseconds,ImageView splashImage) {
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                spin(splashImage);
+                pullingToSide(splashImage);
             }
         }, milliseconds);
     }
 
+    private void createDelay1(int milliseconds,ImageView splashImage) {
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                smaller(splashImage);
+            }
+        }, milliseconds);
+    }
 }
