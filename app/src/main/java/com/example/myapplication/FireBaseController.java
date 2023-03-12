@@ -32,16 +32,6 @@ public class FireBaseController {
         });
 
     }
-    public void sendAutoControl(){
-
-        if (alreadyAutoControlled) {
-            database.getReference("to_altera").setValue(0);
-            alreadyAutoControlled=false;
-        }
-        else {
-
-        }
-    }
 
 
 }

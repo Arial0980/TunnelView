@@ -35,8 +35,6 @@ public class DataActivity extends AppCompatActivity {
         // Read from the database
         FirebaseDatabase database= FirebaseDatabase.getInstance();
 
-
-
         myRefDis1 = database.getReference("test/dis1");
         myRefDis1.addValueEventListener(new ValueEventListener() {
             @Override

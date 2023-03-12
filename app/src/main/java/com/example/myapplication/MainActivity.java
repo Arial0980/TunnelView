@@ -20,7 +20,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ImageView splashImage = findViewById(R.id.imageView2);
+        splashImage.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_YES);
         ImageView coinImage = findViewById(R.id.coin_image);
+
+            ScaleAnimation scaleAnimation = new ScaleAnimation(
+                    5.0f, 0.0f,
+                    5.0f, 0.0f,
+                    Animation.RELATIVE_TO_SELF, 0.5f,
+                    Animation.RELATIVE_TO_SELF, 0.5f
+            );
+            scaleAnimation.setDuration(1300);
+            scaleAnimation.setFillAfter(true);
+            splashImage.startAnimation(scaleAnimation);
 
         ObjectAnimator animator = ObjectAnimator.ofFloat(coinImage, "scaleX", 1f, -1f);
         animator.setDuration(1500);

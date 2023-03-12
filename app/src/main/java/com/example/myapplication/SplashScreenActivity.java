@@ -19,8 +19,8 @@ public class SplashScreenActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_splash_screen);
         ImageView splashImage = findViewById(R.id.imageView);
-        createDelay1(1300,splashImage);
-        createDelay2(2500,splashImage);
+//        createDelay1(1300,splashImage);
+//        createDelay2(2500,splashImage);
         bigger(splashImage);
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -32,7 +32,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                 startActivity(intent, options.toBundle());
                 finish();
             }
-        }, 4900);
+        }, 1450);
     }
     public void pullingToSide( ImageView splashImage)
     {
@@ -49,12 +49,12 @@ public class SplashScreenActivity extends AppCompatActivity {
     public void bigger( ImageView splashImage)
     {
         ScaleAnimation scaleAnimation = new ScaleAnimation(
-                1.0f, 1.5f,
-                1.0f, 1.5f,
+                1.0f, 5.0f,
+                1.0f, 5.0f,
                 Animation.RELATIVE_TO_SELF, 0.5f,
                 Animation.RELATIVE_TO_SELF, 0.5f
         );
-        scaleAnimation.setDuration(1300);
+        scaleAnimation.setDuration(1500);
         scaleAnimation.setFillAfter(true);
         splashImage.startAnimation(scaleAnimation);
     }
