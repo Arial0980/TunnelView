@@ -2,16 +2,21 @@ package com.example.myapplication;
 
 import static android.content.ContentValues.TAG;
 
+import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 
 
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -23,11 +28,12 @@ import com.google.firebase.database.ValueEventListener;
 
 
 public class DataActivity extends AppCompatActivity {
-    private DatabaseReference myRefDis1,myRefDis2,myRefDis3,myRefDidW;
-    private int dis1,dis2,dis3,didW;
-    private Bitmap image;
-    private final int FIVE_SECONDS = 5000;
-    private int WIDTH=100,HEIGHT=100,x=50,y=100;
+    private DatabaseReference myRefDis1,myRefDis2,myRefDis3,myRefDidW,myRefAutoMapping;
+    private int dis1,dis2,dis3,didW,autoMapping;
+    private Bitmap bm;
+    private final int One_SECONDS = 1000;
+    private int x=685,y=1370;
+    private ImageView map;
     private Handler handler = new Handler();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +41,11 @@ public class DataActivity extends AppCompatActivity {
         setContentView(R.layout.activity_data);
         getSupportActionBar().hide();
 
-
-
-
+        map=findViewById(R.id.map);
         TextView right=findViewById(R.id.Right_textView);
         TextView left=findViewById(R.id.Left_textView);
         TextView straight=findViewById(R.id.Straight_textView);
-        // Read from the database
+
         FirebaseDatabase database= FirebaseDatabase.getInstance();
 
         myRefDis1 = database.getReference("test/dis1");
@@ -97,6 +101,22 @@ public class DataActivity extends AppCompatActivity {
             }
         });
 
+        myRefAutoMapping = database.getReference("to_altera");
+        myRefAutoMapping.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                autoMapping = dataSnapshot.getValue(Integer.class);
+                Log.d(TAG, "Value is: " + autoMapping);
+            }
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+
         myRefDidW = database.getReference("test/didW");
         myRefDidW.addValueEventListener(new ValueEventListener() {
             @Override
@@ -105,6 +125,7 @@ public class DataActivity extends AppCompatActivity {
                 // whenever data at this location is updated.
                 didW = dataSnapshot.getValue(Integer.class);
                 Log.d(TAG, "Value is: " + didW);
+                interrupt();
             }
 
             @Override
@@ -114,54 +135,65 @@ public class DataActivity extends AppCompatActivity {
             }
         });
 
-        image = Bitmap.createBitmap(WIDTH, HEIGHT, Bitmap.Config.ARGB_8888);
-        scheduleSendLocation();
+        Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.img_1);
+        bm= originalBitmap.copy(Bitmap.Config.ARGB_8888, true);
     }
-    public void scheduleSendLocation() {
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                drowMap(didW);
-                handler.postDelayed(this, FIVE_SECONDS);
-            }
-        }, FIVE_SECONDS);
+    public void interrupt() {
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                    if(autoMapping==32)
+                        drowMap(didW);
+                    handler.postDelayed(this, One_SECONDS);
+                }
+            }, One_SECONDS);
     }
     public void drowMap(int didWhat){
-        int z;
-        if(didWhat==0){
-            image.setPixel(x-5,y, Color.BLACK);
-            image.setPixel(x+5,y, Color.BLACK);
-            image.setPixel(x,y, Color.YELLOW);
-            y++;
+
+        if (didWhat == 0) {
+            drowPX(x - 40, y, Color.BLACK);
+            drowPX(x + 40, y, Color.BLACK);
+            drowPX(x, y, Color.RED);
+            y -= 5;
 
         }
-        image.setPixel(x,y, Color.YELLOW);
-        if(didWhat==1){
-            image.setPixel(x,y, Color.YELLOW);
-            for(int i=0; i<=3; i++)
-                image.setPixel(x+5,y-i, Color.WHITE);
-            for(int i=0; i<=3; i++)
-                image.setPixel(x-5,y+i, Color.BLACK);
-            for(int i=-5; i<=5; i++)
-                image.setPixel(x-i,y+3, Color.BLACK);
-            z=x;
-            x=y;
-            y=z;
+        if (didWhat == 1) {
+            drowPX(x, y, Color.RED);
+            for (int i = 0; i <= 20; i++)
+                drowPX(x + 40, y + i, Color.WHITE);
+            for (int i = 0; i <= 40; i++)
+                drowPX(x - 40, y - i, Color.BLACK);
+            for (int i = -40; i <= 40; i++)
+                drowPX(x - i, y - 40, Color.BLACK);
+            for (int i = 0; i <= 40; i++)
+                drowPX(x + i, y, Color.RED);
         }
-        if(didWhat==2){
-            image.setPixel(x,y, Color.YELLOW);
-            for(int i=0; i<=3; i++)
-                image.setPixel(x-5,y-i, Color.WHITE);
-            for(int i=0; i<=3; i++)
-                image.setPixel(x+5,y+i, Color.BLACK);
-            for(int i=-5; i<=5; i++)
-                image.setPixel(x-i,y+3, Color.BLACK);
-            z=x;
-            x=y;
-            y=z;
+        if (didWhat == 2) {
+            drowPX(x, y, Color.RED);
+            for (int i = 0; i <= 20; i++)
+                drowPX(x - 40, y + i, Color.WHITE);
+            for (int i = 0; i <= 40; i++)
+                drowPX(x + 40, y - i, Color.BLACK);
+            for (int i = -40; i <= 40; i++)
+                drowPX(x + i, y - 40, Color.BLACK);
+            for (int i = 0; i <= 40; i++)
+                drowPX(x - i, y, Color.RED);
         }
+        map.setImageBitmap(bm);
     }
     public void exit(View view) {
         Intent intent = new Intent(DataActivity.this, MainActivity.class);
         startActivity(intent);
+    }
+    public void drowPX(int x1, int y1, @ColorInt int color){
+        for(int j=0;j<6;j++)
+        {
+            for (int i=0;i<6;i++)
+            {
+                bm.setPixel(x1 - i, y1 - j, color);
+                bm.setPixel(x1 + i, y1 + j, color);
+                bm.setPixel(x1 - i, y1 + j, color);
+                bm.setPixel(x1 + i, y1 - j, color);
+            }
+        }
     }
 }

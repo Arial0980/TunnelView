@@ -128,4 +128,16 @@
         app:layout_constraintVertical_bias="0.011"
         app:srcCompat="@drawable/exit_icon1" />
 
+    <ImageView
+        android:id="@+id/map"
+        android:layout_width="700px"
+        android:layout_height="700px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.027"
+        app:srcCompat="@drawable/img_1" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
