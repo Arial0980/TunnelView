@@ -36,8 +36,8 @@
         app:layout_constraintTop_toTopOf="@+id/button"
         app:layout_constraintVertical_bias="0.0" />
 
-    <VideoView
-        android:id="@+id/videoView"
+    <WebView
+        android:id="@+id/cam"
         android:layout_width="457dp"
         android:layout_height="182dp"
         android:layout_marginTop="52dp"
@@ -89,4 +89,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.151"
         app:srcCompat="@drawable/logo1" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

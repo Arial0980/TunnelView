@@ -26,7 +26,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-
 public class DataActivity extends AppCompatActivity {
     private DatabaseReference myRefDis1,myRefDis2,myRefDis3,myRefDidW,myRefAutoMapping,myRefPos;
     private int dis1,dis2,dis3,didW,d2=0,d3=0,autoMapping,position=0;
