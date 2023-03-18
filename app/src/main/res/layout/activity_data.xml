@@ -143,6 +143,7 @@
         android:id="@+id/mapping"
         android:layout_width="171dp"
         android:layout_height="88dp"
+        android:onClick="AutomaticMapping"
         android:text="mapping"
         android:textColor="#F4F4F4"
         android:textSize="20sp"

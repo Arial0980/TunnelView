@@ -29,7 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class DataActivity extends AppCompatActivity {
     private DatabaseReference myRefDis1,myRefDis2,myRefDis3,myRefDidW,myRefAutoMapping,myRefPos;
-    private int dis1,dis2,dis3,didW,autoMapping,position=0;
+    private int dis1,dis2,dis3,didW,d2=0,d3=0,autoMapping,position=0;
     private Bitmap bm;
     private final int One_SECONDS = 1000;
     private int x=685,y=1370;
@@ -149,6 +149,20 @@ public class DataActivity extends AppCompatActivity {
     }
     public void drowMap(int didWhat)
     {
+        if(dis2<10&&dis2>=0)
+            d2=0;
+        else if(dis2<20&&dis2>=10)
+            d2=5;
+        else
+            d2=10;
+
+        if(dis3<10&&dis3>=0)
+            d3=0;
+        else if(dis3<20&&dis3>=10)
+            d3=5;
+        else
+            d3=10;
+
             if (position > 3)
                 position = 0;
             if (position < 0)
@@ -156,8 +170,8 @@ public class DataActivity extends AppCompatActivity {
             switch (position) {
                 case 0: {
                     if (didWhat == 0) {
-                        drowPX(x - 20, y, Color.BLACK);
-                        drowPX(x + 20, y, Color.BLACK);
+                        drowPX(x - 20-d2, y, Color.BLACK);
+                        drowPX(x + 20+d3, y, Color.BLACK);
                         drowPX(x, y, Color.RED);
                         y -= 5;
                     }
@@ -191,8 +205,8 @@ public class DataActivity extends AppCompatActivity {
                 break;
                 case 1: {
                     if (didWhat == 0) {
-                        drowPX(x + 20, y - 20, Color.BLACK);
-                        drowPX(x + 20, y + 20, Color.BLACK);
+                        drowPX(x + 20, y - 20-d3, Color.BLACK);
+                        drowPX(x + 20, y + 20+d2, Color.BLACK);
                         for (int i = 0; i <= 20; i++)
                             drowPX(x + i, y, Color.RED);
                         x += 5;
@@ -230,8 +244,8 @@ public class DataActivity extends AppCompatActivity {
                 break;
                 case 2: {
                     if (didWhat == 0) {
-                        drowPX(x - 20, y, Color.BLACK);
-                        drowPX(x + 20, y, Color.BLACK);
+                        drowPX(x - 20-d2, y, Color.BLACK);
+                        drowPX(x + 20+d3, y, Color.BLACK);
                         drowPX(x, y, Color.RED);
                         y += 5;
                     }
@@ -260,13 +274,12 @@ public class DataActivity extends AppCompatActivity {
                         position--;
                         myRefDidW.setValue(0);
                     }
-
                 }
                 break;
                 case 3: {
                     if (didWhat == 0) {
-                        drowPX(x - 20, y - 20, Color.BLACK);
-                        drowPX(x - 20, y + 20, Color.BLACK);
+                        drowPX(x - 20, y - 20-d2, Color.BLACK);
+                        drowPX(x - 20, y + 20+d3, Color.BLACK);
                         for (int i = 0; i <= 20; i++)
                             drowPX(x - i, y, Color.RED);
                         x -= 5;
