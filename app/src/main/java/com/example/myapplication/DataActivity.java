@@ -27,12 +27,12 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class DataActivity extends AppCompatActivity {
-    private DatabaseReference myRefDis1,myRefDis2,myRefDis3,myRefDidW,myRefAutoMapping,myRefPos;
-    private int dis1,dis2,dis3,didW,d2=0,d3=0,autoMapping,position=0;
+    private DatabaseReference myRefDis1,myRefDis2,myRefDis3,myRefDidW,myRefAutoMapping,myRefPos,myRefDoNow;
+    private int dis1,dis2,dis3,didW,d2=0,d3=0,autoMapping,position=0,z=0;
     private Bitmap bm;
     private final int One_SECONDS = 1000;
     private int x=685,y=1370;
-    private boolean alreadyAutoControlled=false;
+    private boolean alreadyAutoControlled=false,change=false;
     private ImageView map;
     private Handler handler = new Handler();
     @Override
@@ -47,6 +47,7 @@ public class DataActivity extends AppCompatActivity {
 
         FirebaseDatabase database= FirebaseDatabase.getInstance();
         myRefPos=database.getReference("test/Position");
+        myRefDoNow=database.getReference("test/doNow");
         myRefDis1 = database.getReference("test/dis1");
         myRefDis1.addValueEventListener(new ValueEventListener() {
             @Override
@@ -140,8 +141,20 @@ public class DataActivity extends AppCompatActivity {
     public void interrupt() {
             handler.postDelayed(new Runnable() {
                 public void run() {
-                    if(autoMapping==32)
-                        drowMap(didW);
+                    if(didW==1 || didW==2) {
+                        z++;
+                        change = false;
+                    }
+                    else{
+                        change=true;
+                        z=0;
+                    }
+                    myRefDoNow.setValue(change);
+                    if (change || z==1)
+                        if(autoMapping==32){
+                            drowMap(didW);
+                            myRefDoNow.setValue(change);
+                        }
                     handler.postDelayed(this, One_SECONDS);
                 }
             }, One_SECONDS);
@@ -155,7 +168,7 @@ public class DataActivity extends AppCompatActivity {
         else
             d2=10;
 
-        if(dis3<10&&dis3>=0)
+        if(dis3<10 && dis3>=0)
             d3=0;
         else if(dis3<20&&dis3>=10)
             d3=5;
@@ -185,7 +198,7 @@ public class DataActivity extends AppCompatActivity {
                         for (int i = 0; i <= 20; i++)
                             drowPX(x + i, y, Color.RED);
                         position++;
-                        myRefDidW.setValue(0);
+                        //myRefDidW.setValue(0);
                     }
                     if (didWhat == 2) {
                         drowPX(x, y, Color.RED);
@@ -198,7 +211,7 @@ public class DataActivity extends AppCompatActivity {
                         for (int i = 0; i <= 20; i++)
                             drowPX(x - i, y, Color.RED);
                         position--;
-                        myRefDidW.setValue(0);
+                        //myRefDidW.setValue(0);
                     }
                 }
                 break;
@@ -223,7 +236,7 @@ public class DataActivity extends AppCompatActivity {
                         y += 20;
                         x += 20;
                         position++;
-                        myRefDidW.setValue(0);
+                        //myRefDidW.setValue(0);
                     }
                     if (didWhat == 2) {
                         for (int i = 0; i <= 40; i++)
@@ -237,7 +250,7 @@ public class DataActivity extends AppCompatActivity {
                         y -= 20;
                         x += 20;
                         position--;
-                        myRefDidW.setValue(0);
+                        //myRefDidW.setValue(0);
                     }
                 }
                 break;
@@ -258,7 +271,7 @@ public class DataActivity extends AppCompatActivity {
                         for (int i = 0; i <= 20; i++)
                             drowPX(x - i, y, Color.RED);
                         position = 3;
-                        myRefDidW.setValue(0);
+                        //myRefDidW.setValue(0);
                     }
                     if (didWhat == 2) {
                         for (int i = 0; i <= 40; i++)
@@ -271,7 +284,7 @@ public class DataActivity extends AppCompatActivity {
                             drowPX(x, y + i, Color.RED);
                         y += 20;
                         position--;
-                        myRefDidW.setValue(0);
+                        //myRefDidW.setValue(0);
                     }
                 }
                 break;
@@ -295,7 +308,7 @@ public class DataActivity extends AppCompatActivity {
                         y -= 20;
                         x -= 20;
                         position++;
-                        myRefDidW.setValue(0);
+                        //myRefDidW.setValue(0);
                     }
                     if (didWhat == 2) {
                         for (int i = 0; i < 40; i++)
@@ -309,7 +322,7 @@ public class DataActivity extends AppCompatActivity {
                         y += 20;
                         x -= 20;
                         position--;
-                        myRefDidW.setValue(0);
+                        //myRefDidW.setValue(0);
                     }
                 }
                 break;
