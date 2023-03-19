@@ -152,14 +152,14 @@ public class DataActivity extends AppCompatActivity {
                     myRefDoNow.setValue(change);
                     if (change || z==1)
                         if(autoMapping==32){
-                            drowMap(didW);
+                            drawMap(didW);
                             myRefDoNow.setValue(change);
                         }
                     handler.postDelayed(this, One_SECONDS);
                 }
             }, One_SECONDS);
     }
-    public void drowMap(int didWhat)
+    public void drawMap(int didWhat)
     {
         if(dis2<10&&dis2>=0)
             d2=0;
@@ -182,34 +182,34 @@ public class DataActivity extends AppCompatActivity {
             switch (position) {
                 case 0: {
                     if (didWhat == 0) {
-                        drowPX(x - 20-d2, y, Color.BLACK);
-                        drowPX(x + 20+d3, y, Color.BLACK);
-                        drowPX(x, y, Color.RED);
+                        drawPX(x - 20-d2, y, Color.BLACK);
+                        drawPX(x + 20+d3, y, Color.BLACK);
+                        drawPX(x, y, Color.RED);
                         y -= 5;
                     }
                     if (didWhat == 1) {
-                        drowPX(x, y, Color.RED);
+                        drawPX(x, y, Color.RED);
                         for (int i = 0; i <= 20; i++)
-                            drowPX(x + 20, y + i, Color.WHITE);
+                            drawPX(x + 20, y + i, Color.WHITE);
                         for (int i = 0; i <= 20; i++)
-                            drowPX(x - 20, y - i, Color.BLACK);
+                            drawPX(x - 20, y - i, Color.BLACK);
                         for (int i = -20; i <= 20; i++)
-                            drowPX(x - i, y - 20, Color.BLACK);
+                            drawPX(x - i, y - 20, Color.BLACK);
                         for (int i = 0; i <= 20; i++)
-                            drowPX(x + i, y, Color.RED);
+                            drawPX(x + i, y, Color.RED);
                         position++;
                         //myRefDidW.setValue(0);
                     }
                     if (didWhat == 2) {
-                        drowPX(x, y, Color.RED);
+                        drawPX(x, y, Color.RED);
                         for (int i = 0; i <= 20; i++)
-                            drowPX(x - 20, y + i, Color.WHITE);
+                            drawPX(x - 20, y + i, Color.WHITE);
                         for (int i = 0; i <= 20; i++)
-                            drowPX(x + 20, y - i, Color.BLACK);
+                            drawPX(x + 20, y - i, Color.BLACK);
                         for (int i = -20; i <= 20; i++)
-                            drowPX(x + i, y - 20, Color.BLACK);
+                            drawPX(x + i, y - 20, Color.BLACK);
                         for (int i = 0; i <= 20; i++)
-                            drowPX(x - i, y, Color.RED);
+                            drawPX(x - i, y, Color.RED);
                         position--;
                         //myRefDidW.setValue(0);
                     }
@@ -217,21 +217,21 @@ public class DataActivity extends AppCompatActivity {
                 break;
                 case 1: {
                     if (didWhat == 0) {
-                        drowPX(x + 20, y - 20-d3, Color.BLACK);
-                        drowPX(x + 20, y + 20+d2, Color.BLACK);
+                        drawPX(x + 20, y - 20-d3, Color.BLACK);
+                        drawPX(x + 20, y + 20+d2, Color.BLACK);
                         for (int i = 0; i <= 20; i++)
-                            drowPX(x + i, y, Color.RED);
+                            drawPX(x + i, y, Color.RED);
                         x += 5;
                     }
                     if (didWhat == 1) {
                         for (int i = 0; i <= 40; i++)
-                            drowPX(x + i, y - 20, Color.BLACK);
+                            drawPX(x + i, y - 20, Color.BLACK);
                         for (int i = -15; i <= -5; i++)
-                            drowPX(x - i, y + 20, Color.WHITE);
+                            drawPX(x - i, y + 20, Color.WHITE);
                         for (int i = -20; i <= 20; i++)
-                            drowPX(x + 40, y + i, Color.BLACK);
+                            drawPX(x + 40, y + i, Color.BLACK);
                         for (int i = 0; i <= 20; i++)
-                            drowPX(x + 20, y + i, Color.RED);
+                            drawPX(x + 20, y + i, Color.RED);
 
                         y += 20;
                         x += 20;
@@ -240,13 +240,13 @@ public class DataActivity extends AppCompatActivity {
                     }
                     if (didWhat == 2) {
                         for (int i = 0; i <= 40; i++)
-                            drowPX(x + i, y + 20, Color.BLACK);
+                            drawPX(x + i, y + 20, Color.BLACK);
                         for (int i = -15; i <= -5; i++)
-                            drowPX(x - i, y - 20, Color.WHITE);
+                            drawPX(x - i, y - 20, Color.WHITE);
                         for (int i = -20; i <= 20; i++)
-                            drowPX(x + 40, y + i, Color.BLACK);
+                            drawPX(x + 40, y + i, Color.BLACK);
                         for (int i = 0; i <= 20; i++)
-                            drowPX(x + 20, y - i, Color.RED);
+                            drawPX(x + 20, y - i, Color.RED);
                         y -= 20;
                         x += 20;
                         position--;
@@ -256,32 +256,32 @@ public class DataActivity extends AppCompatActivity {
                 break;
                 case 2: {
                     if (didWhat == 0) {
-                        drowPX(x - 20-d2, y, Color.BLACK);
-                        drowPX(x + 20+d3, y, Color.BLACK);
-                        drowPX(x, y, Color.RED);
+                        drawPX(x - 20-d2, y, Color.BLACK);
+                        drawPX(x + 20+d3, y, Color.BLACK);
+                        drawPX(x, y, Color.RED);
                         y += 5;
                     }
                     if (didWhat == 1) {
                         for (int i = 0; i <= 20; i++)
-                            drowPX(x + 20, y + i, Color.BLACK);
+                            drawPX(x + 20, y + i, Color.BLACK);
                         for (int i = -20; i <= 20; i++)
-                            drowPX(x - i, y + 20, Color.BLACK);
+                            drawPX(x - i, y + 20, Color.BLACK);
                         for (int i = 0; i < 20; i++)
-                            drowPX(x - 20, y - i, Color.WHITE);
+                            drawPX(x - 20, y - i, Color.WHITE);
                         for (int i = 0; i <= 20; i++)
-                            drowPX(x - i, y, Color.RED);
+                            drawPX(x - i, y, Color.RED);
                         position = 3;
                         //myRefDidW.setValue(0);
                     }
                     if (didWhat == 2) {
                         for (int i = 0; i <= 40; i++)
-                            drowPX(x - 20, y + i, Color.BLACK);
+                            drawPX(x - 20, y + i, Color.BLACK);
                         for (int i = -20; i <= 20; i++)
-                            drowPX(x - i, y + 40, Color.BLACK);
+                            drawPX(x - i, y + 40, Color.BLACK);
                         for (int i = 0; i >= -10; i--)
-                            drowPX(x, y, Color.WHITE);
+                            drawPX(x, y, Color.WHITE);
                         for (int i = 0; i <= 20; i++)
-                            drowPX(x, y + i, Color.RED);
+                            drawPX(x, y + i, Color.RED);
                         y += 20;
                         position--;
                         //myRefDidW.setValue(0);
@@ -290,21 +290,21 @@ public class DataActivity extends AppCompatActivity {
                 break;
                 case 3: {
                     if (didWhat == 0) {
-                        drowPX(x - 20, y - 20-d2, Color.BLACK);
-                        drowPX(x - 20, y + 20+d3, Color.BLACK);
+                        drawPX(x - 20, y - 20-d2, Color.BLACK);
+                        drawPX(x - 20, y + 20+d3, Color.BLACK);
                         for (int i = 0; i <= 20; i++)
-                            drowPX(x - i, y, Color.RED);
+                            drawPX(x - i, y, Color.RED);
                         x -= 5;
                     }
                     if (didWhat == 1) {
                         for (int i = 0; i < 40; i++)
-                            drowPX(x - i, y + 20, Color.BLACK);
+                            drawPX(x - i, y + 20, Color.BLACK);
                         for (int i = 0; i < 20; i++)
-                            drowPX(x - i, y - 20, Color.WHITE);
+                            drawPX(x - i, y - 20, Color.WHITE);
                         for (int i = -20; i <= 20; i++)
-                            drowPX(x - 40, y + i, Color.BLACK);
+                            drawPX(x - 40, y + i, Color.BLACK);
                         for (int i = 0; i <= 20; i++)
-                            drowPX(x - 20, y - i, Color.RED);
+                            drawPX(x - 20, y - i, Color.RED);
                         y -= 20;
                         x -= 20;
                         position++;
@@ -312,13 +312,13 @@ public class DataActivity extends AppCompatActivity {
                     }
                     if (didWhat == 2) {
                         for (int i = 0; i < 40; i++)
-                            drowPX(x - i, y - 20, Color.BLACK);
+                            drawPX(x - i, y - 20, Color.BLACK);
                         for (int i = 0; i < 20; i++)
-                            drowPX(x - i, y + 20, Color.WHITE);
+                            drawPX(x - i, y + 20, Color.WHITE);
                         for (int i = -20; i <= 20; i++)
-                            drowPX(x - 40, y + i, Color.BLACK);
+                            drawPX(x - 40, y + i, Color.BLACK);
                         for (int i = 0; i <= 20; i++)
-                            drowPX(x - 20, y + i, Color.RED);
+                            drawPX(x - 20, y + i, Color.RED);
                         y += 20;
                         x -= 20;
                         position--;
@@ -335,7 +335,7 @@ public class DataActivity extends AppCompatActivity {
         Intent intent = new Intent(DataActivity.this, MainActivity.class);
         startActivity(intent);
     }
-    public void drowPX(int x1, int y1, @ColorInt int color){
+    public void drawPX(int x1, int y1, @ColorInt int color){
         for(int j=0;j<4;j++)
         {
             for (int i=0;i<4;i++)
