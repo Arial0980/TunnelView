@@ -27,9 +27,11 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class DataActivity extends AppCompatActivity {
+    private FirebaseDatabase database;
     private DatabaseReference myRefDis1,myRefDis2,myRefDis3,myRefDidW,myRefAutoMapping,myRefPos,myRefDoNow;
     private int dis1,dis2,dis3,didW,d2=0,d3=0,autoMapping,position=0,z=0;
-    private Bitmap bm;
+    private Bitmap bm,originalBitmap;
+    private TextView right,left,straight;
     private final int One_SECONDS = 1000;
     private int x=685,y=1370;
     private boolean alreadyAutoControlled=false,change=false;
@@ -39,28 +41,32 @@ public class DataActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data);
-        getSupportActionBar().hide();
-        map=findViewById(R.id.map);
-        TextView right=findViewById(R.id.Right_textView);
-        TextView left=findViewById(R.id.Left_textView);
-        TextView straight=findViewById(R.id.Straight_textView);
 
-        FirebaseDatabase database= FirebaseDatabase.getInstance();
-        myRefPos=database.getReference("test/Position");
+        getSupportActionBar().hide();//שורת הקוד הזאת גורמת להסתרה של הבר בראש הדף
+
+        map=findViewById(R.id.map);//קטע קוד זה לוקח את התמונה שהגדרנו ב-layout שנוכל להשתמש בה ולעשות עליה פעולות
+
+        right=findViewById(R.id.Right_textView);//קטע קוד זה לוקח את textView שהגדרנו ב-layout שנוכל להשתמש בה ולעשות עליה פעולות
+        left=findViewById(R.id.Left_textView);
+        straight=findViewById(R.id.Straight_textView);
+
+        database= FirebaseDatabase.getInstance();//פקודה זו מחזירה דגימה של אובייקט מתוך מסד הנתונים של Firebase
+        myRefPos=database.getReference("test/Position");//פקודה זו מקבלת הפניה לאובייקט ספציפי מתוך מסד הנתונים האינטרנטי שלנו(Firebase)
         myRefDoNow=database.getReference("test/doNow");
         myRefDis1 = database.getReference("test/dis1");
         myRefDis1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
                 dis1 = dataSnapshot.getValue(Integer.class);
                 straight.setText("Straight:"+Integer.toString(dis1));
                 Log.d(TAG, "Value is: " + dis1);
+
+                //פונקציה זאת פועלת כל פעם שיש שינוי בFirebase במיקום test/dis1
+                //ומכניסה כל הזמן את הערך החדש שלה למשתנה dis1 ומדפיסה אותו גם על המסך בTextView
+                //straight שהגדרנו בשם
             }
             @Override
             public void onCancelled(DatabaseError error) {
-                // Failed to read value
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
@@ -69,16 +75,15 @@ public class DataActivity extends AppCompatActivity {
         myRefDis2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
                 dis2 = dataSnapshot.getValue(Integer.class);
                 left.setText("Left:"+Integer.toString(dis2));
                 Log.d(TAG, "Value is: " + dis2);
+                //פונקציה זאת פועלת כל פעם שיש שינוי בFirebase במיקום test/dis2
+                //ומכניסה כל הזמן את הערך החדש שלה למשתנה dis2 ומדפיסה אותו גם על המסך בTextView
+                //left שהגדרנו בשם
             }
-
             @Override
             public void onCancelled(DatabaseError error) {
-                // Failed to read value
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
@@ -87,16 +92,16 @@ public class DataActivity extends AppCompatActivity {
         myRefDis3.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
                 dis3 = dataSnapshot.getValue(Integer.class);
                 right.setText("Right:"+Integer.toString(dis3));
                 Log.d(TAG, "Value is: " + dis3);
+                //פונקציה זאת פועלת כל פעם שיש שינוי בFirebase במיקום test/dis3
+                //ומכניסה כל הזמן את הערך החדש שלה למשתנה dis3 ומדפיסה אותו גם על המסך בTextView
+                //right שהגדרנו בשם
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
-                // Failed to read value
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
@@ -105,14 +110,13 @@ public class DataActivity extends AppCompatActivity {
         myRefAutoMapping.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
                 autoMapping = dataSnapshot.getValue(Integer.class);
                 Log.d(TAG, "Value is: " + autoMapping);
+                //פונקציה זאת פועלת כל פעם שיש שינוי בFirebase במיקום to_altera
+                //ומכניסה כל הזמן את הערך החדש שלה למשתנה autoMapping
             }
             @Override
             public void onCancelled(DatabaseError error) {
-                // Failed to read value
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
@@ -126,21 +130,24 @@ public class DataActivity extends AppCompatActivity {
                 didW = dataSnapshot.getValue(Integer.class);
                 Log.d(TAG, "Value is: " + didW);
                 interrupt();
+                //פונקציה זאת פועלת כל פעם שיש שינוי בFirebase במיקום test/didW
+                //ומכניסה כל הזמן את הערך החדש שלה למשתנה didW
+                //ומפעילה גם את הפונקציה ()interrupt
             }
-
             @Override
             public void onCancelled(DatabaseError error) {
-                // Failed to read value
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
 
-        Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.img_1);
+        originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.img_1);
         bm= originalBitmap.copy(Bitmap.Config.ARGB_8888, true);
+        //קטע קוד זה מאפשר ליצור תמונה חדשה ולשנות בה פיקסלים לפי מה שהרכב מבצע
     }
     public void interrupt() {
             handler.postDelayed(new Runnable() {
                 public void run() {
+
                     if(didW==1 || didW==2) {
                         z++;
                         change = false;
@@ -158,6 +165,11 @@ public class DataActivity extends AppCompatActivity {
                     handler.postDelayed(this, One_SECONDS);
                 }
             }, One_SECONDS);
+    //בודקת אם didW שווה ל- 1 או ל-2. אם כן, מגדילה את משתנה z ב- 1 ומגדירה את הערך של
+    // משתנה change ל- false. אם לא, מגדירה את הערך של משתנה change ל- true ומאתחלת את הערך של משתנה z ל- 0
+    //בודקת האם הערך של משתנה change הוא true או שהערך של משתנה z הוא 1. אם כן, בודקת האם הערך של משתנה autoMapping הוא 32
+    //אם כן, מפעילה את הפעולה ()drawMap עם הפרמטר didW ומשנה את הערך של הצומת myRefDoNow ב- Firebase לערך הנכון של הערך change
+    //עצמת הפעולה ()postDelayed שוב כדי להפעיל את הפעולה run() של Runnable לאחר מספר שניות שמוגדר בקבוע One_SECONDS
     }
     public void drawMap(int didWhat)
     {
@@ -198,7 +210,6 @@ public class DataActivity extends AppCompatActivity {
                         for (int i = 0; i <= 20; i++)
                             drawPX(x + i, y, Color.RED);
                         position++;
-                        //myRefDidW.setValue(0);
                     }
                     if (didWhat == 2) {
                         drawPX(x, y, Color.RED);
@@ -211,7 +222,6 @@ public class DataActivity extends AppCompatActivity {
                         for (int i = 0; i <= 20; i++)
                             drawPX(x - i, y, Color.RED);
                         position--;
-                        //myRefDidW.setValue(0);
                     }
                 }
                 break;
@@ -236,7 +246,6 @@ public class DataActivity extends AppCompatActivity {
                         y += 20;
                         x += 20;
                         position++;
-                        //myRefDidW.setValue(0);
                     }
                     if (didWhat == 2) {
                         for (int i = 0; i <= 40; i++)
@@ -250,7 +259,6 @@ public class DataActivity extends AppCompatActivity {
                         y -= 20;
                         x += 20;
                         position--;
-                        //myRefDidW.setValue(0);
                     }
                 }
                 break;
@@ -271,7 +279,6 @@ public class DataActivity extends AppCompatActivity {
                         for (int i = 0; i <= 20; i++)
                             drawPX(x - i, y, Color.RED);
                         position = 3;
-                        //myRefDidW.setValue(0);
                     }
                     if (didWhat == 2) {
                         for (int i = 0; i <= 40; i++)
@@ -284,7 +291,6 @@ public class DataActivity extends AppCompatActivity {
                             drawPX(x, y + i, Color.RED);
                         y += 20;
                         position--;
-                        //myRefDidW.setValue(0);
                     }
                 }
                 break;
@@ -330,10 +336,8 @@ public class DataActivity extends AppCompatActivity {
 
         map.setImageBitmap(bm);
         myRefPos.setValue(position);
-    }
-    public void exit(View view) {
-        Intent intent = new Intent(DataActivity.this, MainActivity.class);
-        startActivity(intent);
+        // קטע קוד זה משנה את הצבע של הפיקסלים לפי המרחקים שאנחנו מקבלים מהFirebase ובכך יוצר מפה של המנהרה שהרכב עובר בתוכה
+        //הצביעה של הפיקסלים נעשת בכך שבקטע קוד יש בדיקה של הפוזיציה של הרכב ושל הפעולות שהוא עושה
     }
     public void drawPX(int x1, int y1, @ColorInt int color){
         for(int j=0;j<4;j++)
@@ -346,6 +350,8 @@ public class DataActivity extends AppCompatActivity {
                 bm.setPixel(x1 + i, y1 - j, color);
             }
         }
+    //הפונקציה הזאת גורת למספר פיקסלים לשהות את הצבע בכדי שאם אנחנו נרצה לצבוע איזור מסויים זה
+    // נוכל להשתמש בפונקציה זו במקום לכתוב כל פעם מחדש מספר גדול של פקודות שחוזרות על עצמן
     }
     public void AutomaticMapping(View view){
         if (alreadyAutoControlled) {
@@ -356,5 +362,12 @@ public class DataActivity extends AppCompatActivity {
             myRefAutoMapping.setValue(32);
             alreadyAutoControlled=true;
         }
+        //קטע קוד זה בודק אם הכפתור כבר לחוץ אם לא הוא שולח לFirebase את המספר 32 אשר אומר
+        //לרכב להתחיל למפות אוטומטית את המנהרה ואם הכפתור כבר לחוץ אז הוא ישלח 0 לFirebase כדי לכבות את המיפוי האוטומטי
+    }
+    public void exit(View view) {
+        Intent intent = new Intent(DataActivity.this, MainActivity.class);
+        startActivity(intent);
+        //הפונקציה הזאת גורם למעבר מהדף הנוכחי לדף הראשי
     }
 }
