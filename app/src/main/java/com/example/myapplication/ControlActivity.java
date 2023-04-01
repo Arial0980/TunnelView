@@ -182,6 +182,7 @@ public class ControlActivity extends AppCompatActivity {
             if(servo)
                 myRef.setValue(16);
             else
+
                 myRef.setValue(0);
             back=false;
         }
