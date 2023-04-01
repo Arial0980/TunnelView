@@ -1,26 +1,101 @@
 package com.example.myapplication;
+import static android.content.ContentValues.TAG;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.SystemClock;
+import android.util.Log;
 import android.view.View;
+import android.webkit.WebView;
+import android.widget.TextView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class ControlActivity extends AppCompatActivity {
-    private boolean straight=false,left=false,right=false,back=false,servo=false;//הגדרת משתנים בוליאנים אשר יעזרו לנו בבדיקה של כל פעולה
-    private DatabaseReference myRef;
+    private boolean straight=false,left=false,right=false,back=false,servo=false;
+    private DatabaseReference myRef,ipcam, myRefDis1,myRefDis2,myRefDis3;
+    private TextView rightView,leftView,straightView;
+    private int dis1,dis2,dis3;
     private FirebaseDatabase database;
+    private WebView cam;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_control);
-        getSupportActionBar().hide();//שורת הקוד הזאת גורמת להסתרה של הבר בראש הדף
+        getSupportActionBar().hide();
+
+        rightView=findViewById(R.id.Right_textView);
+        leftView=findViewById(R.id.Left_textView);
+        straightView=findViewById(R.id.Straight_textView);
 
         database=FirebaseDatabase.getInstance();//פקודה זו מחזירה דגימה של אובייקט מתוך מסד הנתונים של Firebase
         myRef=database.getReference("to_altera");//פקודה זו מקבלת הפניה לאובייקט ספציפי מתוך מסד הנתונים האינטרנטי שלנו(Firebase)
+
+        ipcam= database.getReference("ipcam");
+        cam=findViewById(R.id.cam_ip);
+        cam.getSettings().setJavaScriptEnabled(true);
+        cam.getSettings().setBuiltInZoomControls(true);
+        cam.getSettings().setDisplayZoomControls(false);
+        ipcam.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String ip = dataSnapshot.getValue(String.class);
+                if (ip != null)
+                    cam.loadUrl("http://" + ip.toString() + ":81/stream");
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        myRefDis1 = database.getReference("test/dis1");
+        myRefDis1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                dis1 = dataSnapshot.getValue(Integer.class);
+                straightView.setText("Straight:"+Integer.toString(dis1));
+                Log.d(TAG, "Value is: " + dis1);
+            }
+            @Override
+            public void onCancelled(DatabaseError error) {
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+
+        myRefDis2 = database.getReference("test/dis2");
+        myRefDis2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                dis2 = dataSnapshot.getValue(Integer.class);
+                leftView.setText("Left:"+Integer.toString(dis2));
+                Log.d(TAG, "Value is: " + dis2);
+            }
+            @Override
+            public void onCancelled(DatabaseError error) {
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+
+        myRefDis3 = database.getReference("test/dis3");
+        myRefDis3.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                dis3 = dataSnapshot.getValue(Integer.class);
+                rightView.setText("Right:"+Integer.toString(dis3));
+                Log.d(TAG, "Value is: " + dis3);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+
     }
     public void moveStraight(View view){
     right=false;
@@ -151,12 +226,25 @@ public class ControlActivity extends AppCompatActivity {
             servo=true;
         }
         // קוד זה מאפשר להפעיל את המנוע סרוו בכל אחד מהמצבים שיש לנו בכל כיוון
-        // נסיעה הוא ישלח ערך אחר לFirebase וגם אם אנומו רוצים שהוא יפעל שהרכב לא זז
+        // נסיעה הוא ישלח ערך אחר לFirebase וגם אם אנחנו רוצים שהוא יפעל שהרכב לא זז
     }
     public void exit(View view) {
+        myRef.setValue(0);
         Intent intent = new Intent(ControlActivity.this, MainActivity.class);
         startActivity(intent);
         //הפונקציה הזאת גורם למעבר מהדף הנוכחי לדף הראשי
     }
-
+    public void reset(View view){
+        straight=false;
+        left=false;
+        back=false;
+        right=false;
+        servo=false;
+        myRef.setValue(0);
+    }
+    @Override
+    protected void onStop() {
+        cam.destroy();
+        super.onStop();
+    }
 }
