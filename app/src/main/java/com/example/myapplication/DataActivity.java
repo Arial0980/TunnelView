@@ -26,7 +26,7 @@ public class DataActivity extends AppCompatActivity {
     private int dis1,dis2,dis3,didW,d2=0,d3=0,autoMapping,position=0,z=0;
     private Bitmap bm,originalBitmap;
     private TextView right,left,straight;
-    private final int One_SECONDS = 1000;
+    private final int One_SECONDS = 700;
     private int x=685,y=1370;
     private boolean alreadyAutoControlled=false,change=false;
     private ImageView map;
@@ -145,19 +145,19 @@ public class DataActivity extends AppCompatActivity {
     }
     public void drawMap(int didWhat)
     {
-        if(dis2<10&&dis2>=0)
+//        if(dis2<10&&dis2>=0)
             d2=0;
-        else if(dis2<20&&dis2>=10)
-            d2=5;
-        else
-            d2=10;
-
-        if(dis3<10 && dis3>=0)
+//        else if(dis2<20&&dis2>=10)
+//            d2=5;
+//        else
+//            d2=10;
+//
+//        if(dis3<10 && dis3>=0)
             d3=0;
-        else if(dis3<20&&dis3>=10)
-            d3=5;
-        else
-            d3=10;
+//        else if(dis3<20&&dis3>=10)
+//            d3=5;
+//        else
+//            d3=10;
 
         if (position > 3)
             position = 0;
