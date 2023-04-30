@@ -26,7 +26,7 @@ public class DataActivity extends AppCompatActivity {
     private int dis1,dis2,dis3,didW,d2=0,d3=0,autoMapping,position=0,z=0;
     private Bitmap bm,originalBitmap;
     private TextView right,left,straight;
-    private final int One_SECONDS = 700;
+    private final int One_SECONDS = 500;
     private int x,y,x_l,y_l;
     private boolean alreadyAutoControlled=false,change=false;
     private ImageView map;
