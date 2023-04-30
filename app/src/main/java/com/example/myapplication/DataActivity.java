@@ -27,7 +27,7 @@ public class DataActivity extends AppCompatActivity {
     private Bitmap bm,originalBitmap;
     private TextView right,left,straight;
     private final int One_SECONDS = 700;
-    private int x=685,y=1370;
+    private int x,y,x_l,y_l;
     private boolean alreadyAutoControlled=false,change=false;
     private ImageView map;
     private Handler handler = new Handler();
@@ -37,10 +37,13 @@ public class DataActivity extends AppCompatActivity {
         setContentView(R.layout.activity_data);
 
         getSupportActionBar().hide();
+        x=685;
+        x_l=685;
+        y=1370;
+        y_l=1370;
+        map=findViewById(R.id.map);
 
-        map=findViewById(R.id.map);//
-
-        right=findViewById(R.id.Right_textView);//
+        right=findViewById(R.id.Right_textView);
         left=findViewById(R.id.Left_textView);
         straight=findViewById(R.id.Straight_textView);
 
@@ -124,6 +127,17 @@ public class DataActivity extends AppCompatActivity {
     public void interrupt() {
             handler.postDelayed(new Runnable() {
                 public void run() {
+
+                    if(x<40 ||x>1360 ||y>1370 ||y<5)
+                    {
+                        x=x_l;
+                        y=y_l;
+                    }
+                    else
+                    {
+                        x_l=x;
+                        y_l=y;
+                    }
 
                     if(didW==1 || didW==2) {
                         z++;
